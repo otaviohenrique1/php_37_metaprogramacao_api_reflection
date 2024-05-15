@@ -2,10 +2,15 @@
 
 namespace Alura\Reflection;
 
+use Exception;
 use JsonSerializable;
 
 class ClasseExemplo implements JsonSerializable
 {
+    /**
+     * @Column(type="string", lenght=255)
+     */
+    #[Atributo(22)]
     public string $propriedadePublica = 'publica';
     protected string $propriedadeProtegida = 'protegida';
     private string $propriedadePrivada = 'privada';
@@ -17,8 +22,13 @@ class ClasseExemplo implements JsonSerializable
         echo 'Executando construtor de ' . __CLASS__;
     }
 
+    /**
+     * @param ClasseExemplo $mensagem
+     * @param int $numero
+     * @throws Exception quando algo der errado
+     */
     public function metodoPublico(
-        string $mensagem, int $numero
+        ClasseExemplo $mensagem, int $numero = 42
     ): void {
         echo 'Executando método público' . $mensagem . $numero . PHP_EOL;
     }
